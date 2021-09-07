@@ -24,21 +24,22 @@ import ffmpeg
 import asyncio
 import subprocess
 from signal import SIGINT
-from config import Config
 from asyncio import sleep
+from config import Config, Database
 from bot.safone.nopm import User
 from youtube_dl import YoutubeDL
 from pyrogram import Client, filters
 from pyrogram.types import Message
 from pytgcalls import GroupCallFactory
-from bot.safone.radio import RADIO_CALL, FFMPEG_PROCESSES
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 ADMINS = Config.ADMINS
 CHAT_ID = Config.CHAT_ID
 USERNAME = Config.BOT_USERNAME
+VIDEO_CALL = Database.VIDEO_CALL
+RADIO_CALL = Database.RADIO_CALL
+FFMPEG_PROCESSES = Database.FFMPEG_PROCESSES
 
-VIDEO_CALL = {}
 
 ydl_opts = {
         "geo_bypass": True,

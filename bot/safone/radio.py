@@ -4,21 +4,19 @@ import sys
 import ffmpeg
 import asyncio
 import subprocess
-from signal import SIGINT
-from config import Config
 from asyncio import sleep
+from signal import SIGINT
+from config import Config, Database
 from pyrogram import Client, filters
 from pyrogram.types import Message
-from bot.safone.player import VIDEO_CALL
 from bot.safone.player import ydl, group_call_factory
 
 ADMINS = Config.ADMINS
 CHAT_ID = Config.CHAT_ID
 USERNAME = Config.BOT_USERNAME
-
-RADIO_CALL = {}
-FFMPEG_PROCESSES = {}
-
+VIDEO_CALL = Database.VIDEO_CALL
+RADIO_CALL = Database.RADIO_CALL
+FFMPEG_PROCESSES = Database.FFMPEG_PROCESSES
 
 @Client.on_message(filters.command(["radio", f"radio@{USERNAME}"]) & filters.user(ADMINS) & (filters.chat(CHAT_ID) | filters.private))
 async def radio(client, m: Message):
